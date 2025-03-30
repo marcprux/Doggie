@@ -26,6 +26,8 @@
 import Doggie
 import XCTest
 
+#if canImport(Darwin)
+
 class FontTest: XCTestCase {
     
     func testLoadingFont() {
@@ -58,3 +60,4 @@ class FontTest: XCTestCase {
     }
     
 }
+#endif

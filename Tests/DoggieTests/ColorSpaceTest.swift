@@ -26,6 +26,8 @@
 import Doggie
 import XCTest
 
+#if canImport(CoreGraphics)
+
 class ColorSpaceTest: XCTestCase {
     
     func testLoadingColorSpace() {
@@ -39,3 +41,6 @@ class ColorSpaceTest: XCTestCase {
     }
     
 }
+
+#endif
+

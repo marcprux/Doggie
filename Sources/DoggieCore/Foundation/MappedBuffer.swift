@@ -723,7 +723,7 @@ extension MappedBuffer {
                 
                 guard ftruncate(fd, off_t(mapped_size)) != -1 else { fatalError(String(cString: strerror(errno))) }
                 
-                let _address = mmap(nil, mapped_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)
+                let _address: UnsafeMutableRawPointer? = mmap(nil, mapped_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)
                 guard _address != MAP_FAILED else { fatalError(String(cString: strerror(errno))) }
                 
                 self.address = _address!.bindMemory(to: Element.self, capacity: capacity)
@@ -733,7 +733,7 @@ extension MappedBuffer {
                 self.fd = -1
                 self.path = ""
                 
-                let _address = mmap(nil, mapped_size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, fd, 0)
+                let _address: UnsafeMutableRawPointer? = mmap(nil, mapped_size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, fd, 0)
                 guard _address != MAP_FAILED else { fatalError(String(cString: strerror(errno))) }
                 
                 self.address = _address!.bindMemory(to: Element.self, capacity: capacity)
@@ -773,7 +773,7 @@ extension MappedBuffer {
                 
                 guard ftruncate(self.fd, off_t(new_mapped_size)) != -1 else { fatalError(String(cString: strerror(errno))) }
                 
-                let _address = mmap(nil, new_mapped_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)
+                let _address: UnsafeMutableRawPointer? = mmap(nil, new_mapped_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)
                 guard _address != MAP_FAILED else { fatalError(String(cString: strerror(errno))) }
                 
                 self.address = _address!.bindMemory(to: Element.self, capacity: new_capacity)
@@ -794,7 +794,7 @@ extension MappedBuffer {
                     }
                 }
                 
-                let _address = mmap(nil, new_mapped_size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, fd, 0)
+                let _address: UnsafeMutableRawPointer? = mmap(nil, new_mapped_size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, fd, 0)
                 guard _address != MAP_FAILED else { fatalError(String(cString: strerror(errno))) }
                 
                 let new_buffer = _address!.bindMemory(to: Element.self, capacity: new_capacity)

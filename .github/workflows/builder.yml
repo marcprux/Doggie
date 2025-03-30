@@ -111,3 +111,9 @@ jobs:
       uses: SusanDoggie/swift-action@main
       with:
         action: test
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Test Swift Package on Android"
+        uses: skiptools/swift-android-action@v2

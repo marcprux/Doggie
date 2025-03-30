@@ -56,3 +56,12 @@
 @_exported import Glibc
 
 #endif
+
+#if canImport(Android)
+
+@_exported import Android
+
+/// `MAP_FAILED` is not included in the Android module
+let MAP_FAILED = UnsafeMutableRawPointer(bitPattern: -1)!
+
+#endif
